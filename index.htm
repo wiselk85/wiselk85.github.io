@@ -59,7 +59,7 @@
         }
 
         document.getElementById('location_string').innerText = city.name;
-        document.getElementById('location_string').href = 'https://www.google.pt/maps/@' + city.geo[0] + ',' + city.geo[1] + ',16z';
+        document.getElementById('location_string').href = 'https://www.google.pt/maps/@' + city.geo[0] + ',' + city.geo[1] + ',15z';
         document.getElementById('value').innerText = aqi + ' AQI';
         document.getElementById('title').innerText = level.title;
         document.getElementById('msg').innerText = level.msg;
@@ -88,9 +88,9 @@
           document.getElementById('s_pm25').innerText = pm25;
           document.getElementById('location-success2').classList.remove('hidden');
         } catch(e) {}
-      
+
         if (attributions.length === 0) { return; }
-        
+
         try {
           i = document.getElementById('attribution');
           i.innerHTML = 'Source:<br/>' + attributions[0].name;
@@ -219,7 +219,7 @@
     <h1>Air Pollution<span class="detail">.</span>Today</h1>
 
     <div id="location-success" class="hidden">
-    <p>Your closest air quality station is in <a id="location_string"></a>.</p>
+    <p>Your closest air quality station is in <a target="_blank" id="location_string"></a>.</p>
 
     <p class="info-box">The latest estimate for air quality in your area is <span class="detail" id="value"></span>. <b>This means air quality is <span id="title"></span>.</b></p>
     <p id="msg"></p>
@@ -239,7 +239,7 @@
     <br/>
 
     <h3>What is air pollution?</h3>
-    <p>Air pollution is a mix of particles and gases that can reach harmful concentrations both outside and indoors. Its effects can range from higher disease risks to rising temperatures. Soot, smoke, mold, pollen, methane, and carbon dioxide are a just few examples of common pollutants.</p>
+    <p>Air pollution is a mix of particles and gases that can reach harmful concentrations both outside and indoors. Its effects can range from higher disease risks to rising temperatures. Soot, smoke, mold, pollen, methane, and carbon dioxide are just a few examples of common pollutants.</p>
 
     <p class="warning-box">The World Health Organization (WHO) says 4.2 million people die every year as a result of exposure to ambient (outdoor) air pollution, 3.8 million people die from indoors exposure and 91% of the world population lives in places where air quality exceeds WHO guideline limits. (2019)<p/>
 
@@ -266,7 +266,7 @@
     <p>In the meanwhile, if you or your loved ones are at risk, and moving some place else with better air quality is not possible, you may consider limiting exertion on more polluted days, wearing a mask when outside and using an air purifier while indoors.<p/>
 
     <p class="foot">Made with <span alt="love" title="love" class="heart">&hearts;</span> from Portugal &middot; <a href="mailto:wiselk85@gmail.com">Contact</a></p>
-    
+
     <div id="attribution" class="sources hidden"></div>
   </body>
 </html>
