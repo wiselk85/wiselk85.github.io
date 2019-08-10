@@ -49,7 +49,7 @@
           warning: 'Everyone should avoid all outdoor exertion.'
         }
       ],
-      lookupSuccess = function(aqi, name, iaqi, attributions) {
+      lookupSuccess = function(aqi, city, iaqi, attributions) {
         var level = null,
             i;
         for (i = 0; i < ls.length; ++i) {
@@ -58,8 +58,8 @@
           }
         }
 
-        document.getElementById('location_string').innerText = name;
-        document.getElementById('location_string').href = '#';
+        document.getElementById('location_string').innerText = city.name;
+        document.getElementById('location_string').href = 'https://www.google.pt/maps/@' + city.geo[0] + ',' + city.geo[1] + ',16z';
         document.getElementById('value').innerText = aqi + ' AQI';
         document.getElementById('title').innerText = level.title;
         document.getElementById('msg').innerText = level.msg;
@@ -111,7 +111,7 @@
             try {
               var resp = JSON.parse(xhr.response);
 
-              lookupSuccess(resp.data.aqi, resp.data.city.name, resp.data.iaqi, resp.data.attributions);
+              lookupSuccess(resp.data.aqi, resp.data.city, resp.data.iaqi, resp.data.attributions);
             } catch (e) {
               lookupFailed();
             }
