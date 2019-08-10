@@ -86,21 +86,18 @@
           document.getElementById('s_pm10').innerText = pm10;
           document.getElementById('s_pm25').innerText = pm25;
           document.getElementById('location-success2').classList.remove('hidden');
-        } catch(e) {
-          console.warn(e)
-        }
+        } catch(e) {}
       
         if (attributions.length === 0) { return; }
         
         try {
-            document.getElementById('attribution').innerHTML = attributions.map(function(elem) {
-              return attributions[i].name + ' (' + attributions[i].url + ')';
-            }).join(', ');
+          i = document.getElementById('attribution');
+          i.innerHTML = attributions.map(function(elem) {
+            return elem.name + ' (' + elem + ')';
+          }).join(', ');
 
-            document.getElementById('attribution').classList.remove('hidden');
-        } catch(e) {
-          console.warn(e)
-        };
+          i.classList.remove('hidden');
+        } catch(e) {};
       },
       lookupFailed = function() {
         document.getElementById('location_string').innerText = 'unknown';
