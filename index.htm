@@ -59,6 +59,7 @@
         }
 
         document.getElementById('location_string').innerText = name;
+        document.getElementById('location_string').href = '#';
         document.getElementById('value').innerText = aqi + ' AQI';
         document.getElementById('title').innerText = level.title;
         document.getElementById('msg').innerText = level.msg;
@@ -218,7 +219,7 @@
     <h1>Air Pollution<span class="detail">.</span>Today</h1>
 
     <div id="location-success" class="hidden">
-    <p>Your current location is <span id="location_string"></span>.</p>
+    <p>Your closest air quality station is in <a id="location_string"></a>.</p>
 
     <p class="info-box">The latest estimate for air quality in your area is <span class="detail" id="value"></span>. <b>This means air quality is <span id="title"></span>.</b></p>
     <p id="msg"></p>
