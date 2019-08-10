@@ -92,9 +92,9 @@
         
         try {
           i = document.getElementById('attribution');
-          i.innerHTML = attributions.map(function(elem) {
-            return elem.name + ' (' + elem + ')';
-          }).join(', ');
+          i.innerHTML = '<p>Attribution:</p><p>' + attributions.map(function(elem) {
+            return elem.name + ' (' + elem.url + ')';
+          }).join(', ') + '</p>';
 
           i.classList.remove('hidden');
         } catch(e) {};
@@ -158,7 +158,7 @@
     display: none;
   }
   .sources {
-    color: lightgrey;
+    color: gray;
     font-size: small;
   }
   .panic {
