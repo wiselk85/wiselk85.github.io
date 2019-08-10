@@ -92,10 +92,7 @@
         
         try {
           i = document.getElementById('attribution');
-          i.innerHTML = 'Sources:<br/>' + attributions.map(function(elem) {
-            return btoa(elem.name) != 'V29ybGQgQWlyIFF1YWxpdHkgSW5kZXggUHJvamVjdA==' ? elem.name : '';
-          }).join('<br/>');
-
+          i.innerHTML = 'Source:<br/>' + attributions[0].name;
           i.classList.remove('hidden');
         } catch(e) {};
       },
