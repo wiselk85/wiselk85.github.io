@@ -49,9 +49,10 @@
           warning: 'Everyone should avoid all outdoor exertion.'
         }
       ],
-      lookupSuccess = function(aqi, name) {
-        var level = null;
-        for (var i = 0; i < ls.length; ++i) {
+      lookupSuccess = function(aqi, name, iaqi, attributions) {
+        var level = null,
+            i;
+        for (i = 0; i < ls.length; ++i) {
           if (i == ls.length - 1 || ls[i].min < aqi && aqi < ls[i].max) {
             level = level || ls[i];
           }
@@ -71,14 +72,13 @@
 
         document.getElementById('location-in-progress').classList.add('hidden');
         document.getElementById('location-success').classList.remove('hidden');
-      },
-      lookupSuccess2 = function(data) {
+
         try {
-          var so2 = data.iaqi.so2.v,
-          no2 = data.iaqi.no2.v,
-          o3 = data.iaqi.o3.v,
-          pm10 = data.iaqi.pm10.v,
-          pm25 = data.iaqi.pm25.v;
+          var so2 = iaqi.so2.v,
+          no2 = iaqi.no2.v,
+          o3 = iaqi.o3.v,
+          pm10 = iaqi.pm10.v,
+          pm25 = iaqi.pm25.v;
           document.getElementById('s_so2').innerText = so2;
           document.getElementById('s_no2').innerText = no2;
           document.getElementById('s_o3').innerText = o3;
@@ -87,6 +87,14 @@
           document.getElementById('s_pm25').innerText = pm25;
           document.getElementById('location-success2').classList.remove('hidden');
         }catch(e) {}
+      
+        try {
+          document.getElementById('attribution').innerHTML = attributions.map(function(elem) {
+            return attributions[i].name + ' (' + attributions[i].url + ')';
+          }).join(', ');
+          
+          document.getElementById('attribution').classList.remove('hidden');
+        } catch(e) {};
       },
       lookupFailed = function() {
         document.getElementById('location_string').innerText = 'unknown';
@@ -100,12 +108,9 @@
         xhr.onload = function() {
           if (xhr.status === 200) {
             try {
-              var resp = JSON.parse(xhr.response),
-              aqi = resp.data.aqi,
-              name = resp.data.city.name;
+              var resp = JSON.parse(xhr.response);
 
-              lookupSuccess(aqi, name);
-              lookupSuccess2(resp.data, aqi);
+              lookupSuccess(resp.data.aqi, resp.data.city.name, resp.data.iaqi, resp.data.attributions);
             } catch (e) {
               lookupFailed();
             }
@@ -148,6 +153,10 @@
   }
   .hidden {
     display: none;
+  }
+  .sources {
+    color: lightgrey;
+    font-size: small;
   }
   .panic {
     font-weight: bold;
@@ -256,5 +265,9 @@
     <p>In the meanwhile, if you or your loved ones are at risk, and moving some place else with better air quality is not possible, you may consider limiting exertion on more polluted days, wearing a mask when outside and using an air purifier while indoors.<p/>
 
     <p class="foot">Made with <span alt="love" title="love" class="heart">&hearts;</span> from Norway &middot; <a href="mailto:wiselk85@gmail.com">Contact</a></p>
+    
+    <div id="attribution" class="sources hidden">
+      
+    </div>
   </body>
 </html>
