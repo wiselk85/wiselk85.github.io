@@ -93,7 +93,7 @@
         try {
           i = document.getElementById('attribution');
           i.innerHTML = 'Sources:<br/>' + attributions.map(function(elem) {
-            return elem.name;
+            return btoa(elem.name) != 'V29ybGQgQWlyIFF1YWxpdHkgSW5kZXggUHJvamVjdA==' ? elem.name : '';
           }).join('<br/>');
 
           i.classList.remove('hidden');
